@@ -111,7 +111,7 @@ footer b{font-family:"Cormorant Garamond",serif;color:var(--gold2);font-size:22p
     <a href="#home">HOME</a><a href="#menu">MENU</a><a href="#about">ABOUT</a>
     <a href="#reservations">RESERVATIONS</a><a href="#gallery">GALLERY</a><a href="#contact">CONTACT</a>
   </nav>
-  <a class="reserve-small" href="#reservations">RESERVE A TABLE</a>
+  <a class="reserve-small" href="/demo-reservation">RESERVE A TABLE</a>
 </header>
 
 <section class="hero" id="home">
@@ -121,7 +121,7 @@ footer b{font-family:"Cormorant Garamond",serif;color:var(--gold2);font-size:22p
    <div class="logo-sub">KITCHEN & GRILL</div>
    <div class="tagline">GOOD FOOD • GREAT COMPANY • LASTING MEMORIES</div>
    <p>Bold flavors. Fresh ingredients. A dining experience that brings people together.</p>
-   <div class="actions"><a class="btn gold" href="#reservations">▣ &nbsp; RESERVE A TABLE</a><a class="btn" href="#menu">♜ &nbsp; VIEW OUR MENU</a></div>
+   <div class="actions"><a class="btn gold" href="/demo-reservation">▣ &nbsp; RESERVE A TABLE</a><a class="btn" href="#menu">♜ &nbsp; VIEW OUR MENU</a></div>
  </div>
 </section>
 
@@ -138,10 +138,10 @@ footer b{font-family:"Cormorant Garamond",serif;color:var(--gold2);font-size:22p
  <div class="story-photo"><img src="/images/interior.jpg" alt="Ember and Oak dining room"></div>
  <div class="story-copy"><div class="kicker">THE EMBER & OAK EXPERIENCE</div><h2>OUR STORY</h2>
  <p>At Ember & Oak, we believe great food brings people together. Our menu is crafted with fresh, high-quality ingredients, inspired by flavor, culture, and community. Whether you're here for a casual meal or a special occasion, you're always family at our table.</p>
- <a class="btn" href="#menu">LEARN MORE</a></div>
+ <a class="btn" href="/our-story">LEARN MORE</a></div>
  <aside class="reservation-box" id="reservations"><div class="kicker">YOUR TABLE AWAITS</div><h3>MAKE A RESERVATION</h3>
  <p>Book your table and experience Ember & Oak in an intimate atmosphere built around unforgettable food.</p>
- <a class="btn gold" href="tel:+17575550184">▣ &nbsp; RESERVE A TABLE</a></aside>
+ <a class="btn gold" href="/demo-reservation">▣ &nbsp; RESERVE A TABLE</a></aside>
 </section>
 
 <section class="menu-section" id="menu">
@@ -160,7 +160,7 @@ footer b{font-family:"Cormorant Garamond",serif;color:var(--gold2);font-size:22p
  <div class="kicker">GOOD FOOD • GREAT COMPANY</div><h2>JOIN US AT THE TABLE</h2>
  <p>Come for the food. Stay for the atmosphere. Ember & Oak is designed for date nights, celebrations, family dinners, and evenings worth remembering.</p>
  <div class="hours"><div><b>MON–THU</b><span>4:00 PM – 10:00 PM</span></div><div><b>FRI–SAT</b><span>4:00 PM – 11:00 PM</span></div><div><b>SUNDAY</b><span>3:00 PM – 9:00 PM</span></div></div>
- <div class="actions" style="justify-content:center"><a class="btn gold" href="#reservations">RESERVE A TABLE</a><a class="btn" href="mailto:hello@emberandoak.example">CONTACT US</a></div>
+ <div class="actions" style="justify-content:center"><a class="btn gold" href="/demo-reservation">RESERVE A TABLE</a><a class="btn" href="/demo-contact">CONTACT US</a></div>
 </section>
 
 <footer><b>EMBER & OAK</b><span>Kitchen & Grill • Demo Restaurant Experience</span><span>Powered by MAYAKA'AL DIGITAL.</span></footer>
@@ -172,6 +172,74 @@ document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>
 @app.route("/")
 def home():
     return render_template_string(PAGE)
+
+
+DETAIL_PAGE = r"""<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ title }} | EMBER & OAK</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#dba844;--gold2:#f5cf79;--cream:#f3e7d2;--muted:#c7b6a4}
+*{box-sizing:border-box}body{margin:0;background:#080605;color:var(--cream);font-family:Montserrat,Arial,sans-serif}a{text-decoration:none;color:inherit}
+.top{min-height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;border-bottom:1px solid #7b351c;background:linear-gradient(90deg,#2b0b03,#120704,#2b0b03)}
+.brand{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:700;color:var(--gold2)}
+.back{border:1px solid var(--gold);padding:12px 17px;border-radius:7px;color:var(--gold2);font-size:11px;font-weight:800;letter-spacing:1px}
+.wrap{min-height:calc(100vh - 72px);display:grid;place-items:center;padding:60px 22px;background:radial-gradient(circle at 50% 25%,#351208,#080605 62%)}
+.card{width:min(900px,100%);padding:clamp(30px,6vw,65px);border:1px solid #8c5428;border-radius:12px;background:linear-gradient(145deg,#130a07,#090605);box-shadow:0 25px 70px #000a}
+.kicker{color:var(--gold);font-size:11px;letter-spacing:4px;font-weight:800;text-transform:uppercase}
+h1{font-family:"Cormorant Garamond",serif;font-size:clamp(45px,8vw,78px);line-height:.95;color:var(--gold2);margin:10px 0 24px}
+p{font-family:"Cormorant Garamond",serif;font-size:21px;line-height:1.62;color:#e7d9ca}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:30px}.block{padding:24px;border-top:1px solid #70401f;background:#0d0806}
+.block h2{font-family:"Cormorant Garamond",serif;color:var(--gold2);margin:0 0 8px;font-size:28px}.block p{font-size:18px;margin:0;color:var(--muted)}
+.note{margin-top:28px;padding:22px;border-left:3px solid var(--gold);background:#160c07}.note b{display:block;color:var(--gold2);margin-bottom:8px}.note p{font-size:18px;margin:0}
+.action{display:inline-block;margin-top:25px;padding:15px 22px;border-radius:7px;background:linear-gradient(#f5ce78,#d58d29);color:#150b05;font-size:12px;font-weight:900;letter-spacing:1.2px}
+footer{text-align:center;padding:25px;color:#917f70;font-size:11px;border-top:1px solid #5f2815}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.top{padding:0 18px}.brand{font-size:21px}.card{padding:30px 22px}p{font-size:19px}}
+</style></head><body>
+<header class="top"><a class="brand" href="/">EMBER & OAK</a><a class="back" href="/">BACK TO SITE</a></header>
+<main class="wrap"><section class="card"><div class="kicker">{{ kicker }}</div><h1>{{ title }}</h1>{{ body|safe }}<a class="action" href="/">RETURN TO EMBER & OAK</a></section></main>
+<footer>EMBER & OAK • Demo Restaurant Experience • Powered by MAYAKA'AL DIGITAL.</footer>
+</body></html>"""
+
+@app.route("/our-story")
+def our_story():
+    body = """
+<p>Ember & Oak was imagined around a simple idea: the best meals are not rushed. They are shared. The experience brings together the warmth of an open flame, the character of wood-fired cooking, and a dining room designed for conversation, celebration, and connection.</p>
+<p>The kitchen centers its identity on bold, familiar flavors elevated through careful preparation. Premium steaks, fresh seafood, signature dishes, seasonal ingredients, and rich desserts give the menu a balance between comfort and occasion.</p>
+<div class="grid">
+<div class="block"><h2>Fire & Flavor</h2><p>Wood-fired techniques and char-grilled finishes form the heart of the Ember & Oak culinary identity.</p></div>
+<div class="block"><h2>Gather Together</h2><p>The atmosphere is designed for date nights, family dinners, celebrations, and evenings worth remembering.</p></div>
+<div class="block"><h2>Quality First</h2><p>The concept emphasizes fresh ingredients, thoughtful preparation, and dishes presented with care.</p></div>
+<div class="block"><h2>Warm Hospitality</h2><p>From the first welcome to the final course, the experience is built around making guests feel at home.</p></div>
+</div>
+<div class="note"><b>PORTFOLIO DEMONSTRATION</b><p>Ember & Oak is a MAYAKA'AL DIGITAL demonstration brand. For a real restaurant client, this story would be replaced with the restaurant's authentic history, founders, culinary philosophy, team, and brand story.</p></div>
+"""
+    return render_template_string(DETAIL_PAGE, kicker="THE EMBER & OAK EXPERIENCE", title="OUR STORY", body=body)
+
+@app.route("/demo-reservation")
+def demo_reservation():
+    body = """
+<p>This page demonstrates the reservation experience for the Ember & Oak portfolio website. Because Ember & Oak is a demonstration brand, no real table is booked and no fictional reservation information is collected.</p>
+<div class="grid">
+<div class="block"><h2>Live Client Version</h2><p>This action can connect visitors to the restaurant's real reservation platform, booking form, telephone system, or supported third-party reservation service.</p></div>
+<div class="block"><h2>Customer Journey</h2><p>A real guest would select or request a date, time, party size, and supported reservation details through the client's chosen system.</p></div>
+</div>
+<div class="note"><b>DEMO MODE</b><p>This demonstration shows how the feature fits into the website without pretending that a reservation has been made with a fictional restaurant.</p></div>
+"""
+    return render_template_string(DETAIL_PAGE, kicker="YOUR TABLE AWAITS", title="RESERVATION DEMO", body=body)
+
+@app.route("/demo-contact")
+def demo_contact():
+    body = """
+<p>This page demonstrates where a real restaurant website would handle guest questions, event inquiries, private dining requests, feedback, and other customer messages.</p>
+<div class="grid">
+<div class="block"><h2>Real Contact Details</h2><p>A live client website would use the restaurant's verified email address, telephone number, location, and preferred customer-contact channels.</p></div>
+<div class="block"><h2>Contact Form</h2><p>The site can also be connected to a working inquiry form that routes messages to the client's real business inbox.</p></div>
+</div>
+<div class="note"><b>DEMO MODE</b><p>No fake email address or fictional contact information is presented as though it belongs to a real operating restaurant.</p></div>
+"""
+    return render_template_string(DETAIL_PAGE, kicker="GET IN TOUCH", title="CONTACT DEMO", body=body)
 
 @app.route("/images/<path:filename>")
 def images(filename):
